@@ -89,3 +89,16 @@ function decArrowPinCode(arrowStr) {
   return out;
 }
 //
+
+//smarttrim
+
+function smartTrim(text, maxLength = 100) {
+  if (text.length <= maxLength) return text;
+
+  const trimmed = text.slice(0, maxLength);
+  const lastSpace = trimmed.lastIndexOf(" ");
+
+  return trimmed.slice(0, lastSpace > 0 ? lastSpace : maxLength) + "…";
+}
+
+// 22.01.2026
