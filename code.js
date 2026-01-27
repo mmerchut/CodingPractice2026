@@ -102,3 +102,40 @@ function smartTrim(text, maxLength = 100) {
 }
 
 // 22.01.2026
+
+
+/**
+ * Funkcja analyzeNumbers analizuje tablicę liczb i zwraca
+ * podstawowe statystyki opisowe.
+ *
+ * @param {number[]} numbers - Tablica liczb do analizy
+ * @returns {Object} Obiekt zawierający:
+ *  - min: najmniejszą wartość w tablicy
+ *  - max: największą wartość w tablicy
+ *  - average: średnią arytmetyczną
+ *
+ * Jeśli tablica jest pusta, funkcja zwraca null.
+ */
+function analyzeNumbers(numbers) {
+  // Sprawdzamy, czy przekazana wartość jest poprawną, niepustą tablicą
+  if (!Array.isArray(numbers) || numbers.length === 0) {
+    return null;
+  }
+
+  // Obliczamy sumę wszystkich elementów tablicy
+  const sum = numbers.reduce((acc, value) => acc + value, 0);
+
+  // Wyznaczamy średnią arytmetyczną
+  const average = sum / numbers.length;
+
+  // Wyznaczamy minimum i maksimum
+  const min = Math.min(...numbers);
+  const max = Math.max(...numbers);
+
+  // Zwracamy obiekt z wynikami analizy
+  return {
+    min,
+    max,
+    average
+  };
+}
