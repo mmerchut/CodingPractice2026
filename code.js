@@ -139,3 +139,60 @@ function analyzeNumbers(numbers) {
     average
   };
 }
+
+// statystyka
+function analyzeNumbers(data) {
+  if (!Array.isArray(data)) {
+    throw new TypeError("Argument musi być tablicą.");
+  }
+
+  const numbers = data.filter(
+    x => typeof x === "number" && !Number.isNaN(x)
+  );
+
+  if (numbers.length === 0) {
+    throw new Error("Brak poprawnych danych liczbowych.");
+  }
+
+  const n = numbers.length;
+  const sorted = [...numbers].sort((a, b) => a - b);
+
+  const mean = sorted.reduce((sum, x) => sum + x, 0) / n;
+
+  const median =
+    n % 2 === 0
+      ? (sorted[n / 2 - 1] + sorted[n / 2]) / 2
+      : sorted[Math.floor(n / 2)];
+
+  const variance =
+    sorted.reduce((sum, x) => sum + Math.pow(x - mean, 2), 0) / n;
+
+  const stdDev = Math.sqrt(variance);
+
+  const q1 = sorted[Math.floor(n * 0.25)];
+  const q3 = sorted[Math.floor(n * 0.75)];
+  const iqr = q3 - q1;
+
+  const lowerFence = q1 - 1.5 * iqr;
+  const upperFence = q3 + 1.5 * iqr;
+
+  const outliers = sorted.filter(
+    x => x < lowerFence || x > upperFence
+  );
+
+  return {
+    count: n,
+    min: sorted[0],
+    max: sorted[n - 1],
+    mean: Number(mean.toFixed(2)),
+    median,
+    variance: Number(variance.toFixed(2)),
+    stdDev: Number(stdDev.toFixed(2)),
+    q1,
+    q3,
+    iqr,
+    outliers
+  };
+}
+
+// statystyka
