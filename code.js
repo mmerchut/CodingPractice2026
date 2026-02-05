@@ -196,3 +196,20 @@ function analyzeNumbers(data) {
 }
 
 // statystyka
+
+//finanse - oblicz ratę kredytu
+
+function obliczRateKredytu(kwota, oprocentowanieRoczne, lata) {
+  const miesiecznaStopa = oprocentowanieRoczne / 100 / 12;
+  const liczbaRat = lata * 12;
+
+  const rata =
+    (kwota * miesiecznaStopa) /
+    (1 - Math.pow(1 + miesiecznaStopa, -liczbaRat));
+
+  return Number(rata.toFixed(2));
+}
+
+// przykład użycia
+console.log(obliczRateKredytu(300000, 7.5, 25)); // np. 2215.37
+
