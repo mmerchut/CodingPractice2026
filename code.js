@@ -213,3 +213,30 @@ function obliczRateKredytu(kwota, oprocentowanieRoczne, lata) {
 // przykład użycia
 console.log(obliczRateKredytu(300000, 7.5, 25)); // np. 2215.37
 
+// 06.02
+
+function memoizeWithTTL(fn, ttl = 5000) {
+  const cache = new Map();
+
+  return function (...args) {
+    const key = JSON.stringify(args);
+    const now = Date.now();
+
+    if (cache.has(key)) {
+      const { value, expires } = cache.get(key);
+      if (now < expires) {
+        return value; // hit z cache 💨
+      }
+      cache.delete(key); // cache wygasł
+    }
+
+    const result = fn.apply(this, args);
+    cache.set(key, {
+      value: result,
+      expires: now + ttl
+    });
+
+    return result;
+  };
+}
+
