@@ -477,7 +477,7 @@ function round6(x) { return Math.round((x + Number.EPSILON) * 1e6) / 1e6; }
 // --- PRZYKŁAD UŻYCIA ---
 const result = buildLoanSchedule({
   principal: 300000,
-  apr: 0.085,
+  apr: 0.085,     
   termMonths: 360,
   type: "annuity",
   prepaymentMode: "reduce_term",
