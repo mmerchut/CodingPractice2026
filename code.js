@@ -489,3 +489,37 @@ const result = buildLoanSchedule({
 
 console.log(result.summary);
 console.log(result.schedule.slice(0, 3)); // pierwsze 3 miesiące
+
+/**
+ * Function: groupAnagrams
+ * ------------------------
+ * This function takes an array of words and groups them into arrays of anagrams.
+ * Anagrams are words that contain the same letters in a different order.
+ * 
+ * Example:
+ * Input: ["listen", "silent", "enlist", "hello", "ohlle"]
+ * Output: [["listen", "silent", "enlist"], ["hello", "ohlle"]]
+ */
+
+function groupAnagrams(words) {
+    const map = new Map();
+
+    for (let word of words) {
+        // Sort letters of the word to create a key
+        const sorted = word.split('').sort().join('');
+
+        // If key doesn't exist, create a new array
+        if (!map.has(sorted)) {
+            map.set(sorted, []);
+        }
+
+        // Push the word into the corresponding anagram group
+        map.get(sorted).push(word);
+    }
+
+    // Return grouped anagrams as an array of arrays
+    return Array.from(map.values());
+}
+
+// Example usage:
+console.log(groupAnagrams(["listen", "silent", "enlist", "hello", "ohlle"]));
