@@ -523,3 +523,40 @@ function groupAnagrams(words) {
 
 // Example usage:
 console.log(groupAnagrams(["listen", "silent", "enlist", "hello", "ohlle"]));
+
+//random password generator
+function generatePassword(length = 12, options = {}) {
+  const {
+    lowercase = true,
+    uppercase = true,
+    numbers = true,
+    symbols = true
+  } = options;
+
+  const lower = "abcdefghijklmnopqrstuvwxyz";
+  const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const nums = "0123456789";
+  const syms = "!@#$%^&*()_+[]{}|;:,.<>?";
+
+  let chars = "";
+  if (lowercase) chars += lower;
+  if (uppercase) chars += upper;
+  if (numbers) chars += nums;
+  if (symbols) chars += syms;
+
+  if (!chars) {
+    throw new Error("Musisz wybrać przynajmniej jeden typ znaków!");
+  }
+
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * chars.length);
+    password += chars[randomIndex];
+  }
+
+  return password;
+}
+
+// Przykład użycia:
+console.log(generatePassword(16, { symbols: true }));
+// end random password generator
